@@ -1,0 +1,48 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html,
+body {
+  max-width: 100vw;
+  overflow-x: hidden;
+  --main-color: white;
+  --text-color: black;
+}
+
+body {
+  background: linear-gradient(90deg, #7e21af 0%, #1f40d3 100%);
+  font-family: "Varela Round", sans-serif;
+  color: var(--main-color);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    color-scheme: dark;
+  }
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.title-heading {
+  font-size: 4rem;
+  font-weight: 700;
+  margin: 1rem 0;
+}
