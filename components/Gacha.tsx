@@ -7,41 +7,64 @@ import { EggProps } from "../types/Types";
 
 type rollResult = any;
 
+interface EggObject {
+  name: string;
+  rate: number;
+  image: string;
+  rarity: string;
+}
+
 const Gacha = () => {
   const [rollResult, setrollResult] = useState<rollResult>();
   const [bestPrizeWon, setbestPrizeWon] = useState(false);
-  let defaultEgg = { image: "zed-cache.png", rarity: "" };
+  let defaultEgg = { image: "zed-cache.png", rarity: "", name: "zed cache" };
   const [egg, setEgg] = useState<EggProps>(defaultEgg);
   const [isRolling, setisRolling] = useState(false);
   const animationDuration = 2;
 
+  const eggRates: EggObject[] = [
+    {
+      name: "Zed",
+      rate: 0.5,
+      image: "project-zed.webp",
+      rarity: "ultimate-icon.png",
+    },
+    {
+      name: "Bun Bun",
+      rate: 0.5,
+      image: "bunbun-egg.webp",
+      rarity: "epic-icon.png",
+    },
+  ];
   const variants = {
     start: { rotate: [0, -30, 30, 0] },
     end: { rotate: 0 },
   };
 
   const handleOnClick = () => {
-    roll();
-    setisRolling(true);
+    handleResultData(calculateResult(eggRates));
+
     setTimeout(() => {
       setisRolling(false);
     }, animationDuration * 1000);
   };
-
-  const roll = () => {
-    if (bestPrizeWon) {
-      setbestPrizeWon(false);
-      setEgg(defaultEgg);
-    }
-    const grandPrize = 0.5;
+  function calculateResult(eggRates: EggObject[]) {
     const roll = Math.random();
-    setrollResult(roll.toFixed(2));
-    console.log(roll);
-    if (roll <= grandPrize) {
-      setbestPrizeWon(true);
-      setEgg({ image: "project-zed.webp", rarity: "ultimate-icon.png" });
+    let cumulativeProbability = 0;
+
+    for (let i = 0; i < eggRates.length; i++) {
+      cumulativeProbability += eggRates[i].rate;
+      if (roll < cumulativeProbability) {
+        return eggRates[i];
+      }
     }
+  }
+  const handleResultData = (result: any) => {
+    console.log(result);
+    setisRolling(true);
+    setEgg({ image: result.image, rarity: result.rarity, name: result.name });
   };
+
   return (
     <div className={styles.container}>
       {isRolling ? (
@@ -61,9 +84,9 @@ const Gacha = () => {
           />
         </motion.div>
       ) : (
-        <EggImage image={egg.image} rarity={"none"} />
+        <EggImage image={egg.image} rarity={"none"} name="zed cache" />
       )}
-
+      <h3>Result is: {!isRolling && <span>{egg.name}</span>}</h3>
       <button
         onClick={handleOnClick}
         disabled={isRolling}
