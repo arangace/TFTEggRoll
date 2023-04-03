@@ -26,8 +26,8 @@ const EggImage = ({ image, rarity }: EggProps) => {
         <Image
           className={styles.rarityImage}
           alt="egg-rarity"
-          width={50}
-          height={50}
+          width={40}
+          height={40}
           src={raritySrc}
         />
       )}
