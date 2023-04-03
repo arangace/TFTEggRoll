@@ -33,7 +33,7 @@ const Gacha = () => {
       setbestPrizeWon(false);
       setEgg(defaultEgg);
     }
-    const grandPrize = 1;
+    const grandPrize = 0.5;
     const roll = Math.random();
     setrollResult(roll.toFixed(2));
     console.log(roll);
@@ -61,7 +61,7 @@ const Gacha = () => {
           />
         </motion.div>
       ) : (
-        <EggImage image={egg.image} rarity={egg.rarity} />
+        <EggImage image={egg.image} rarity={"none"} />
       )}
 
       <button
