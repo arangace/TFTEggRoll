@@ -6,21 +6,17 @@
   padding: 0 1rem;
 }
 .rollButton {
-  // remove default button styling
   background: none;
   border: none;
-  padding: 0;
-  // optional
   cursor: pointer;
-  // optional
   background-color: #7e21af;
-  // optional
   font-family: inherit;
-  // optional
   font-size: inherit;
-  // optional
   color: white;
-  // optional
   text-align: inherit;
   padding: 1rem;
+  &:hover,
+  &:focus-visible {
+    background-color: #1f40d3;
+  }
 }
