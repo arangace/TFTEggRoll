@@ -11,7 +11,7 @@ const EggImage = ({ eggImage }: EggImageProps) => {
 
   return (
     <div>
-      <Image alt="tft-egg-image" src={imageSrc} width={200} height={200} />
+      <Image alt="tft-egg-image" src={imageSrc} width={200} height={175} />
     </div>
   );
 };
