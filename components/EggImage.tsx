@@ -8,8 +8,10 @@ const EggImage = ({ image, rarity }: EggProps) => {
   const [raritySrc, setraritySrc] = useState("");
   useEffect(() => {
     setImageSrc(`/images/${image}`);
+  }, [image]);
+  useEffect(() => {
     setraritySrc(`/images/${rarity}`);
-  }, [image, rarity]);
+  }, [rarity]);
 
   return (
     <div className={styles.container}>
@@ -26,8 +28,8 @@ const EggImage = ({ image, rarity }: EggProps) => {
         <Image
           className={styles.rarityImage}
           alt="egg-rarity"
-          width={40}
-          height={40}
+          width={25}
+          height={25}
           src={raritySrc}
         />
       )}

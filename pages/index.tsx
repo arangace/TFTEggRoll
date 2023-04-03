@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useEffect } from "react";
-import Interface from "../components/Interface";
+import Gacha from "../components/Gacha";
 
 export default function Home() {
   return (
@@ -16,7 +16,7 @@ export default function Home() {
       </Head>
       <div className="container">
         <h1 className="title-heading">TFT Egg Roll</h1>
-        <Interface />
+        <Gacha />
       </div>
     </>
   );

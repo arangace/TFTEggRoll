@@ -1,13 +1,18 @@
 .container {
+  background-color: var(--main-color);
+  border-radius: 15px;
+  margin: 2rem;
+  padding: 2rem;
+  color: var(--text-color);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: inherit;
+  position: relative;
   overflow: hidden;
 }
 .eggImageContainer {
-  height: 175px;
+  height: 197px;
   .eggImage {
   }
 }

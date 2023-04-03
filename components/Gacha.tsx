@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import styles from "../styles/gacha.module.scss";
-import EggImage from "./EggImage";
-import { motion } from "framer-motion";
+
 import Image from "next/image";
 import { EggProps } from "../types/Types";
+import Egg from "./Egg";
 
 interface EggObject {
   name: string;
@@ -18,30 +18,42 @@ const Gacha = () => {
   const eggRates: EggObject[] = [
     {
       name: "Zed",
-      rate: 0.5,
+      rate: 0.25,
       image: "project-zed.webp",
       rarity: "ultimate-icon.png",
     },
     {
       name: "Bun Bun",
-      rate: 0.5,
+      rate: 0.25,
       image: "bunbun-egg.webp",
       rarity: "epic-icon.png",
     },
+    {
+      name: "Bungo",
+      rate: 0.25,
+      image: "bungo-egg.webp",
+      rarity: "epic-icon.png",
+    },
+    {
+      name: "Dango Rango",
+      rate: 0.25,
+      image: "dango-rango-egg.webp",
+      rarity: "legendary-icon.png",
+    },
   ];
-  const variants = {
-    start: { rotate: [0, -30, 30, 0] },
-    end: { rotate: 0 },
-  };
 
   const [egg, setEgg] = useState<EggProps>(defaultEgg);
   const [isRolling, setisRolling] = useState(false);
+  const [start, setStart] = useState(true);
+  const rollsRef = useRef(0);
 
   const handleOnClick = () => {
+    setStart(false);
     handleResultData(calculateResult(eggRates));
 
     setTimeout(() => {
       setisRolling(false);
+      rollsRef.current += 1;
     }, animationDuration * 1000);
   };
 
@@ -64,29 +76,19 @@ const Gacha = () => {
 
   return (
     <div className={styles.container}>
-      {isRolling ? (
-        <motion.div
-          variants={variants}
-          animate={isRolling ? "start" : "end"}
-          transition={{ duration: animationDuration, ease: "easeInOut" }}
-          className={styles.eggImageContainer}
-        >
-          <Image
-            alt="tft-random-egg-image"
-            src={"/images/tft-egg-refined.png"}
-            width={200}
-            height={175}
-            priority={true}
-            className={styles.eggImage}
-          />
-        </motion.div>
+      {start ? (
+        <Image
+          alt="tft-egg-image"
+          src={`/images/${defaultEgg.image}`}
+          width={200}
+          height={175}
+        />
       ) : (
-        <EggImage image={egg.image} rarity={"none"} />
-      )}
-      {!isRolling && (
-        <h3>
-          Result is: <span>{egg.name}</span>
-        </h3>
+        <Egg
+          isRolling={isRolling}
+          egg={egg}
+          animationDuration={animationDuration}
+        />
       )}
 
       <button
