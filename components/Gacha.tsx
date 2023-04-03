@@ -3,13 +3,15 @@ import styles from "../styles/gacha.module.scss";
 import EggImage from "./EggImage";
 import { motion } from "framer-motion";
 import Image from "next/image";
+import { EggProps } from "../types/Types";
 
 type rollResult = any;
+
 const Gacha = () => {
   const [rollResult, setrollResult] = useState<rollResult>();
   const [bestPrizeWon, setbestPrizeWon] = useState(false);
-  const [eggImage, seteggImage] = useState("zed-cache.png");
-  const [isRocking, setIsRocking] = useState(false);
+  let defaultEgg = { image: "zed-cache.png", rarity: "common" };
+  const [egg, setEgg] = useState<EggProps>(defaultEgg);
   const [isRolling, setisRolling] = useState(false);
   const animationDuration = 2;
 
@@ -20,32 +22,31 @@ const Gacha = () => {
 
   const handleOnClick = () => {
     roll();
-    setIsRocking(true);
+    setisRolling(true);
     setTimeout(() => {
-      setIsRocking(false);
+      setisRolling(false);
     }, animationDuration * 1000);
   };
 
   const roll = () => {
     if (bestPrizeWon) {
       setbestPrizeWon(false);
-      seteggImage("zed-cache.png");
+      setEgg(defaultEgg);
     }
-    seteggImage("tft-egg-refined.png");
     const grandPrize = 0.2;
     const roll = Math.random();
     setrollResult(roll.toFixed(2));
     if (roll <= grandPrize) {
       setbestPrizeWon(true);
-      seteggImage("project-zed.webp");
+      setEgg({ image: "project-zed.webp", rarity: "ultimate" });
     }
   };
   return (
     <div className={styles.container}>
-      {isRocking ? (
+      {isRolling ? (
         <motion.div
           variants={variants}
-          animate={isRocking ? "start" : "end"}
+          animate={isRolling ? "start" : "end"}
           transition={{ duration: animationDuration, ease: "easeInOut" }}
         >
           <Image
@@ -56,12 +57,16 @@ const Gacha = () => {
           />
         </motion.div>
       ) : (
-        <EggImage eggImage={eggImage} />
+        <EggImage image={egg.image} rarity={egg.rarity} />
       )}
 
       <div>roll: {rollResult}</div>
       <div>{bestPrizeWon ? "You Won" : "Keep trying!"}</div>
-      <button onClick={handleOnClick} className={styles.rollButton}>
+      <button
+        onClick={handleOnClick}
+        disabled={isRolling}
+        className={styles.rollButton}
+      >
         Open
       </button>
     </div>
