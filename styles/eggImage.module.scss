@@ -3,5 +3,13 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 0 1rem;
+  margin: 0;
+  padding: 0;
+  border: 1px solid red;
+  position: relative;
+}
+.rarityImage {
+  position: absolute;
+  bottom: 0;
+  left: 50;
 }

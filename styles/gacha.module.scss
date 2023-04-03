@@ -1,22 +1,33 @@
 .container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 0 1rem;
+  height: inherit;
+  overflow: hidden;
+}
+.eggImageContainer {
+  .eggImage {
+  }
 }
 .rollButton {
-  background: none;
   border: none;
-  cursor: pointer;
-  background-color: #7e21af;
   font-family: inherit;
   font-size: inherit;
-  color: white;
   text-align: inherit;
   padding: 1rem;
+  margin: 1rem;
+  cursor: pointer;
+  background-color: #7e21af;
+  color: white;
   &:hover,
   &:focus-visible {
     background-color: #1f40d3;
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    color: #999;
+    cursor: default;
   }
 }

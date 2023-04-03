@@ -10,7 +10,7 @@ type rollResult = any;
 const Gacha = () => {
   const [rollResult, setrollResult] = useState<rollResult>();
   const [bestPrizeWon, setbestPrizeWon] = useState(false);
-  let defaultEgg = { image: "zed-cache.png", rarity: "common" };
+  let defaultEgg = { image: "zed-cache.png", rarity: "" };
   const [egg, setEgg] = useState<EggProps>(defaultEgg);
   const [isRolling, setisRolling] = useState(false);
   const animationDuration = 2;
@@ -33,12 +33,13 @@ const Gacha = () => {
       setbestPrizeWon(false);
       setEgg(defaultEgg);
     }
-    const grandPrize = 0.2;
+    const grandPrize = 1;
     const roll = Math.random();
     setrollResult(roll.toFixed(2));
+    console.log(roll);
     if (roll <= grandPrize) {
       setbestPrizeWon(true);
-      setEgg({ image: "project-zed.webp", rarity: "ultimate" });
+      setEgg({ image: "project-zed.webp", rarity: "ultimate-icon.png" });
     }
   };
   return (
@@ -48,24 +49,27 @@ const Gacha = () => {
           variants={variants}
           animate={isRolling ? "start" : "end"}
           transition={{ duration: animationDuration, ease: "easeInOut" }}
+          className={styles.eggImageContainer}
         >
           <Image
             alt="tft-random-egg-image"
-            src={"/images/tft-egg.webp"}
+            src={"/images/tft-egg-refined.png"}
             width={200}
             height={175}
+            priority={true}
+            className={styles.eggImage}
           />
         </motion.div>
       ) : (
         <EggImage image={egg.image} rarity={egg.rarity} />
       )}
 
-      <div>roll: {rollResult}</div>
-      <div>{bestPrizeWon ? "You Won" : "Keep trying!"}</div>
       <button
         onClick={handleOnClick}
         disabled={isRolling}
-        className={styles.rollButton}
+        className={`${styles.rollButton} ${
+          isRolling ? styles.rollButtonDisabled : ""
+        }`}
       >
         Open
       </button>

@@ -1,6 +1,13 @@
 .container {
   background-color: var(--main-color);
   border-radius: 15px;
+  margin: 2rem;
   padding: 2rem;
   color: var(--text-color);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  position: relative;
+  width: 100%;
+  height: 100%;
 }
