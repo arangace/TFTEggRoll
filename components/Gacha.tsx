@@ -5,8 +5,6 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 import { EggProps } from "../types/Types";
 
-type rollResult = any;
-
 interface EggObject {
   name: string;
   rate: number;
@@ -15,13 +13,8 @@ interface EggObject {
 }
 
 const Gacha = () => {
-  const [rollResult, setrollResult] = useState<rollResult>();
-  const [bestPrizeWon, setbestPrizeWon] = useState(false);
-  let defaultEgg = { image: "zed-cache.png", rarity: "", name: "zed cache" };
-  const [egg, setEgg] = useState<EggProps>(defaultEgg);
-  const [isRolling, setisRolling] = useState(false);
+  let defaultEgg = { image: "zed-cache.png", rarity: "", name: "" };
   const animationDuration = 2;
-
   const eggRates: EggObject[] = [
     {
       name: "Zed",
@@ -41,6 +34,9 @@ const Gacha = () => {
     end: { rotate: 0 },
   };
 
+  const [egg, setEgg] = useState<EggProps>(defaultEgg);
+  const [isRolling, setisRolling] = useState(false);
+
   const handleOnClick = () => {
     handleResultData(calculateResult(eggRates));
 
@@ -48,7 +44,8 @@ const Gacha = () => {
       setisRolling(false);
     }, animationDuration * 1000);
   };
-  function calculateResult(eggRates: EggObject[]) {
+
+  const calculateResult = (eggRates: EggObject[]) => {
     const roll = Math.random();
     let cumulativeProbability = 0;
 
@@ -58,9 +55,9 @@ const Gacha = () => {
         return eggRates[i];
       }
     }
-  }
+  };
+
   const handleResultData = (result: any) => {
-    console.log(result);
     setisRolling(true);
     setEgg({ image: result.image, rarity: result.rarity, name: result.name });
   };
@@ -84,9 +81,14 @@ const Gacha = () => {
           />
         </motion.div>
       ) : (
-        <EggImage image={egg.image} rarity={"none"} name="zed cache" />
+        <EggImage image={egg.image} rarity={"none"} />
       )}
-      <h3>Result is: {!isRolling && <span>{egg.name}</span>}</h3>
+      {!isRolling && (
+        <h3>
+          Result is: <span>{egg.name}</span>
+        </h3>
+      )}
+
       <button
         onClick={handleOnClick}
         disabled={isRolling}

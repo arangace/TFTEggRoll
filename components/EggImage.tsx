@@ -3,7 +3,7 @@ import Image from "next/image";
 import styles from "../styles/eggImage.module.scss";
 import { EggProps } from "../types/Types";
 
-const EggImage = ({ image, rarity, name }: EggProps) => {
+const EggImage = ({ image, rarity }: EggProps) => {
   const [imageSrc, setImageSrc] = useState("");
   const [raritySrc, setraritySrc] = useState("");
   useEffect(() => {
