@@ -3,21 +3,19 @@ import styles from "../styles/gacha.module.scss";
 import { EggObject, EggProps } from "../types/Types";
 import Image from "next/image";
 import Egg from "./Egg";
-import { eggRates } from "../constants/egg-variants";
+import { eggVarieties, defaultEgg } from "../constants/egg-variants";
 
 const Gacha = () => {
-  let defaultEgg = { image: "zed-cache.png", rarity: "", name: "" };
-  const animationDuration = 2;
-
   const [egg, setEgg] = useState<EggProps>(defaultEgg);
   const [isRolling, setisRolling] = useState(false);
   const [start, setStart] = useState(true);
   const [rarity, setrarity] = useState("");
   const rollsRef = useRef(0);
+  const animationDuration = 2;
 
   const handleOnClick = () => {
     setStart(false);
-    handleResultData(calculateResult(eggRates));
+    handleResultData(calculateResult(eggVarieties));
 
     setTimeout(() => {
       setisRolling(false);
@@ -33,17 +31,19 @@ const Gacha = () => {
       cumulativeProbability += eggRates[i].rate;
       if (roll < cumulativeProbability) {
         if (eggRates[i].rarity === "") {
-          // calculate rarity
+          // calculate rarity and set rarity if there isn't a defined rarity
           const eggRarity = calculateRarity();
           setrarity(eggRarity);
           return eggRates[i];
         } else {
+          // if there's a rarity, set rarity as the eggs rarity
           setrarity(eggRates[i].rarity);
           return eggRates[i];
         }
       }
     }
   };
+
   const calculateRarity = () => {
     const roll = Math.random();
     if (roll <= 0.05) {

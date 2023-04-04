@@ -10,7 +10,7 @@ const EggImage = ({ image, rarity }: EggProps) => {
     setImageSrc(`/images/${image}`);
   }, [image]);
   useEffect(() => {
-    setraritySrc(`/images/${rarity}`);
+    setraritySrc(`/images/rarity-icons/${rarity}`);
   }, [rarity]);
 
   return (
