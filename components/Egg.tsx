@@ -7,10 +7,11 @@ import styles from "../styles/eggImage.module.scss";
 interface isRollingProp {
   isRolling: boolean;
   egg: EggProps;
+  rarity: string;
   animationDuration: number;
 }
 
-const Egg = ({ isRolling, egg, animationDuration }: isRollingProp) => {
+const Egg = ({ isRolling, egg, rarity, animationDuration }: isRollingProp) => {
   const rockingVariants = {
     start: { rotate: [0, -45, 45, 0] },
     end: { rotate: 0 },
@@ -45,7 +46,7 @@ const Egg = ({ isRolling, egg, animationDuration }: isRollingProp) => {
         variants={resultVariants}
         animate={isRolling ? "hidden" : "visible"}
       >
-        <EggImage image={egg.image} rarity={egg.rarity} />
+        <EggImage image={egg.image} rarity={rarity} />
       </motion.div>
 
       {!isRolling && egg ? (

@@ -10,18 +10,18 @@ export const eggRates: EggObject[] = [
     name: "Bun Bun",
     rate: 0.25,
     image: "bunbun-egg.webp",
-    rarity: "epic-icon.png",
+    rarity: "",
   },
   {
     name: "Bungo",
     rate: 0.25,
     image: "bungo-egg.webp",
-    rarity: "epic-icon.png",
+    rarity: "",
   },
   {
     name: "Dango Rango",
     rate: 0.25,
     image: "dango-rango-egg.webp",
-    rarity: "legendary-icon.png",
+    rarity: "",
   },
 ];

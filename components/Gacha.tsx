@@ -12,6 +12,7 @@ const Gacha = () => {
   const [egg, setEgg] = useState<EggProps>(defaultEgg);
   const [isRolling, setisRolling] = useState(false);
   const [start, setStart] = useState(true);
+  const [rarity, setrarity] = useState("");
   const rollsRef = useRef(0);
 
   const handleOnClick = () => {
@@ -31,14 +32,32 @@ const Gacha = () => {
     for (let i = 0; i < eggRates.length; i++) {
       cumulativeProbability += eggRates[i].rate;
       if (roll < cumulativeProbability) {
-        return eggRates[i];
+        if (eggRates[i].rarity === "") {
+          // calculate rarity
+          const eggRarity = calculateRarity();
+          setrarity(eggRarity);
+          return eggRates[i];
+        } else {
+          setrarity(eggRates[i].rarity);
+          return eggRates[i];
+        }
       }
+    }
+  };
+  const calculateRarity = () => {
+    const roll = Math.random();
+    if (roll <= 0.05) {
+      return "legendary-icon.png";
+    } else if (roll <= 0.2) {
+      return "epic-icon.png";
+    } else {
+      return "rare-icon.png";
     }
   };
 
   const handleResultData = (result: any) => {
     setisRolling(true);
-    setEgg({ image: result.image, rarity: result.rarity, name: result.name });
+    setEgg({ image: result.image, rarity: rarity, name: result.name });
   };
 
   return (
@@ -54,6 +73,7 @@ const Gacha = () => {
         <Egg
           isRolling={isRolling}
           egg={egg}
+          rarity={rarity}
           animationDuration={animationDuration}
         />
       )}
