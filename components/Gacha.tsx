@@ -63,12 +63,14 @@ const Gacha = () => {
   return (
     <div className={styles.container}>
       {start ? (
-        <Image
-          alt="tft-egg-image"
-          src={`/images/${defaultEgg.image}`}
-          width={200}
-          height={175}
-        />
+        <div className={styles.defaultEgg}>
+          <Image
+            alt="tft-egg-image"
+            src={`/images/${defaultEgg.image}`}
+            width={200}
+            height={175}
+          />
+        </div>
       ) : (
         <Egg
           isRolling={isRolling}
