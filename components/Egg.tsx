@@ -11,15 +11,19 @@ interface isRollingProp {
 }
 
 const Egg = ({ isRolling, egg, animationDuration }: isRollingProp) => {
-  const variants = {
+  const rockingVariants = {
     start: { rotate: [0, -45, 45, 0] },
     end: { rotate: 0 },
+  };
+  const resultVariants = {
+    hidden: { opacity: 0, display: "none" },
+    visible: { opacity: 1, display: "block" },
   };
   return (
     <React.Fragment>
       {isRolling && egg ? (
         <motion.div
-          variants={variants}
+          variants={rockingVariants}
           animate={isRolling ? "start" : "end"}
           transition={{ duration: animationDuration, ease: "easeInOut" }}
           className={styles.eggImageContainer}
@@ -34,8 +38,16 @@ const Egg = ({ isRolling, egg, animationDuration }: isRollingProp) => {
           />
         </motion.div>
       ) : (
-        <EggImage image={egg.image} rarity={egg.rarity} />
+        ""
       )}
+      <motion.div
+        initial={"hidden"}
+        variants={resultVariants}
+        animate={isRolling ? "hidden" : "visible"}
+      >
+        <EggImage image={egg.image} rarity={egg.rarity} />
+      </motion.div>
+
       {!isRolling && egg ? (
         <h3>
           Result is: <span>{egg.name}</span>

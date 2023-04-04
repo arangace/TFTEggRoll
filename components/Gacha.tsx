@@ -1,46 +1,13 @@
 import React, { useEffect, useState, useRef } from "react";
 import styles from "../styles/gacha.module.scss";
-
+import { EggObject, EggProps } from "../types/Types";
 import Image from "next/image";
-import { EggProps } from "../types/Types";
 import Egg from "./Egg";
-
-interface EggObject {
-  name: string;
-  rate: number;
-  image: string;
-  rarity: string;
-}
+import { eggRates } from "../constants/egg-variants";
 
 const Gacha = () => {
   let defaultEgg = { image: "zed-cache.png", rarity: "", name: "" };
   const animationDuration = 2;
-  const eggRates: EggObject[] = [
-    {
-      name: "Zed",
-      rate: 0.25,
-      image: "project-zed.webp",
-      rarity: "ultimate-icon.png",
-    },
-    {
-      name: "Bun Bun",
-      rate: 0.25,
-      image: "bunbun-egg.webp",
-      rarity: "epic-icon.png",
-    },
-    {
-      name: "Bungo",
-      rate: 0.25,
-      image: "bungo-egg.webp",
-      rarity: "epic-icon.png",
-    },
-    {
-      name: "Dango Rango",
-      rate: 0.25,
-      image: "dango-rango-egg.webp",
-      rarity: "legendary-icon.png",
-    },
-  ];
 
   const [egg, setEgg] = useState<EggProps>(defaultEgg);
   const [isRolling, setisRolling] = useState(false);
