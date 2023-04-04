@@ -3,7 +3,7 @@ import { EggProps } from "../types/Types";
 import EggImage from "./EggImage";
 import { motion } from "framer-motion";
 import Image from "next/image";
-import styles from "../styles/eggImage.module.scss";
+import styles from "../styles/egg.module.scss";
 interface isRollingProp {
   isRolling: boolean;
   egg: EggProps;
@@ -21,7 +21,7 @@ const Egg = ({ isRolling, egg, rarity, animationDuration }: isRollingProp) => {
     visible: { opacity: 1, display: "block" },
   };
   return (
-    <React.Fragment>
+    <div className={styles.eggContainer}>
       {isRolling && egg ? (
         <motion.div
           variants={rockingVariants}
@@ -49,14 +49,14 @@ const Egg = ({ isRolling, egg, rarity, animationDuration }: isRollingProp) => {
         <EggImage image={egg.image} rarity={rarity} />
       </motion.div>
 
-      {!isRolling && egg ? (
-        <h3>
-          Result is: <span>{egg.name}</span>
-        </h3>
-      ) : (
-        ""
-      )}
-    </React.Fragment>
+      <div className={styles.titleContainer}>
+        {!isRolling && egg ? (
+          <h3 className={styles.eggName}>{egg.name}</h3>
+        ) : (
+          ""
+        )}
+      </div>
+    </div>
   );
 };
 
