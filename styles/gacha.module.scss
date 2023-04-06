@@ -7,6 +7,10 @@
   justify-content: center;
   align-items: center;
   padding: 0rem 2rem;
+  padding-bottom: 1rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  margin-bottom: 5rem;
 }
 .defaultEgg {
   padding-top: 1rem;
@@ -21,7 +25,7 @@
   padding: 1rem;
   margin: 1rem;
   cursor: pointer;
-  background-color: #7e21af;
+  background-color: var(--secondary-color);
   color: white;
   &:hover,
   &:focus-visible {
@@ -48,7 +52,7 @@
   padding-top: 1rem;
   padding-bottom: 1rem;
   cursor: pointer;
-  color: #7e21af;
+  color: var(--secondary-color);
   background: none;
   position: relative;
   span {
@@ -58,7 +62,7 @@
   &:hover,
   &:focus-visible {
     span {
-      border-bottom: 2px solid #7e21af;
+      border-bottom: 2px solid var(--secondary-color);
     }
   }
   &:after {

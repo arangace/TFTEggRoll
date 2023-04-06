@@ -12,6 +12,7 @@ body {
   overflow-x: hidden;
   --main-color: white;
   --text-color: black;
+  --secondary-color: #7e21af;
   @media (prefers-color-scheme: dark) {
     html {
       --main-color: black;

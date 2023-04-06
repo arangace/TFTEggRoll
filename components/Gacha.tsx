@@ -9,13 +9,13 @@ import Results from "./Results";
 type ResultData = {
   name: string;
   rarity: string;
+  image: string;
 };
 
 const Gacha = () => {
   const [egg, setEgg] = useState<EggProps>(defaultEgg);
   const [isRolling, setisRolling] = useState(false);
   const [start, setStart] = useState(true);
-  const [rarity, setrarity] = useState("");
   const [showResults, setshowResults] = useState(false);
   const [resultData, setresultData] = useState<ResultData[]>([]);
   const rollsRef = useRef(0);
@@ -38,20 +38,19 @@ const Gacha = () => {
   const calculateResult = (eggRates: EggObject[]) => {
     const roll = Math.random();
     let cumulativeProbability = 0;
+    let eggRarity = "";
 
     for (let i = 0; i < eggRates.length; i++) {
       cumulativeProbability += eggRates[i].rate;
       if (roll < cumulativeProbability) {
         if (eggRates[i].rarity === "") {
           // calculate rarity and set rarity if there isn't a defined rarity
-          const eggRarity = calculateRarity();
-          setrarity(eggRarity);
-          return eggRates[i];
+          eggRarity = calculateRarity();
         } else {
           // if there's a rarity, set rarity as the eggs rarity
-          setrarity(eggRates[i].rarity);
-          return eggRates[i];
+          eggRarity = eggRates[i].rarity;
         }
+        return { egg: eggRates[i], eggRarity };
       }
     }
   };
@@ -67,13 +66,18 @@ const Gacha = () => {
     }
   };
 
-  const handleResultData = (result: any) => {
+  const handleResultData = ({ egg, eggRarity }: any) => {
     setisRolling(true);
-    setEgg({ image: result.image, rarity: rarity, name: result.name });
-    setresultData((resultData) => [
-      ...resultData,
-      { name: result.name, rarity: rarity },
-    ]);
+    setEgg({ image: egg.image, rarity: eggRarity, name: egg.name });
+    setTimeout(() => {
+      setresultData((prevResultData) => {
+        const newResultData = [
+          ...prevResultData,
+          { name: egg.name, rarity: eggRarity, image: egg.image },
+        ];
+        return newResultData;
+      });
+    }, animationDuration * 1000);
   };
 
   return (
@@ -103,7 +107,6 @@ const Gacha = () => {
                 imageSize={imageSize}
                 isRolling={isRolling}
                 egg={egg}
-                rarity={rarity}
                 animationDuration={animationDuration}
               />
             </>
@@ -129,7 +132,7 @@ const Gacha = () => {
             </button>
           </div>
 
-          <Results resultData={resultData} />
+          <Results totalRolls={rollsRef.current} resultData={resultData} />
         </>
       )}
     </div>
