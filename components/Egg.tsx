@@ -9,9 +9,16 @@ interface isRollingProp {
   egg: EggProps;
   rarity: string;
   animationDuration: number;
+  imageSize: { width: number; height: number };
 }
 
-const Egg = ({ isRolling, egg, rarity, animationDuration }: isRollingProp) => {
+const Egg = ({
+  isRolling,
+  egg,
+  rarity,
+  animationDuration,
+  imageSize,
+}: isRollingProp) => {
   const rockingVariants = {
     start: { rotate: [0, -45, 45, 0] },
     end: { rotate: 0 },
@@ -32,8 +39,8 @@ const Egg = ({ isRolling, egg, rarity, animationDuration }: isRollingProp) => {
           <Image
             alt="tft-random-egg-image"
             src={"/images/tft-egg-refined.png"}
-            width={200}
-            height={175}
+            width={imageSize.width}
+            height={imageSize.height}
             priority={true}
             className={styles.eggImage}
           />
@@ -46,7 +53,7 @@ const Egg = ({ isRolling, egg, rarity, animationDuration }: isRollingProp) => {
         variants={resultVariants}
         animate={isRolling ? "hidden" : "visible"}
       >
-        <EggImage image={egg.image} rarity={rarity} />
+        <EggImage imageSize={imageSize} image={egg.image} rarity={rarity} />
       </motion.div>
 
       <div className={styles.titleContainer}>

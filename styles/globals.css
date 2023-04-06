@@ -1,3 +1,5 @@
+@import "@fortawesome/fontawesome-free/css/all.css";
+
 * {
   box-sizing: border-box;
   padding: 0;
@@ -10,12 +12,25 @@ body {
   overflow-x: hidden;
   --main-color: white;
   --text-color: black;
+  @media (prefers-color-scheme: dark) {
+    html {
+      --main-color: black;
+      --text-color: white;
+    }
+  }
+  @media (prefers-color-scheme: light) {
+    html {
+      --main-color: white;
+      --text-color: black;
+    }
+  }
 }
 
 body {
   background: linear-gradient(90deg, #7e21af 0%, #1f40d3 100%);
   font-family: "Varela Round", sans-serif;
   color: var(--main-color);
+  height: 100vh;
 }
 
 a {
