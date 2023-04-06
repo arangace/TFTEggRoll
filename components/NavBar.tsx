@@ -18,9 +18,6 @@ const NavBar = () => {
         </Link>
       </div>
       <ul className={styles.navContainer}>
-        <li>
-          <Link href="/About">About</Link>
-        </li>
         {/* TODO later functionality */}
         {/* <li>
           <Link href="">Login</Link>
