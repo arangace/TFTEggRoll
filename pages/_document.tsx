@@ -8,6 +8,10 @@ export default function Document() {
         <link rel="manifest" href="/manifest.json" />
         <link rel="apple-touch-icon" href="/images/logo-dark.png"></link>
         <meta name="theme-color" content="#fff" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap"
+          rel="stylesheet"
+        ></link>
       </Head>
       <body>
         <Main />

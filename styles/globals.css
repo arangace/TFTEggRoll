@@ -23,8 +23,9 @@ body {
 }
 
 body {
+  font-family: "Poppins", sans-serif;
+
   background: linear-gradient(90deg, #7e21af 0%, #1f40d3 100%);
-  font-family: "Varela Round", sans-serif;
   color: var(--main-color);
   height: 100vh;
 }
