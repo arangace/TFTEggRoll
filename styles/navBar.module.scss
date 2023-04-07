@@ -44,10 +44,17 @@
 .darkModeButton {
   border: none;
   background: none;
+
   cursor: pointer;
   font-size: 1.5rem;
   color: var(--main-color);
   &:hover {
     color: #ccc;
+  }
+  &:before {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 600;
+    content: "\f042";
+    padding: 0.5rem;
   }
 }
