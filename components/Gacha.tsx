@@ -91,6 +91,7 @@ const Gacha = () => {
                 src={`/images/${defaultEgg.image}`}
                 width={imageSize.width}
                 height={imageSize.height}
+                priority={true}
               />
             </div>
           ) : (
