@@ -1,6 +1,6 @@
 import styles from "../styles/results.module.scss";
-import Image from "next/image";
 import EggImage from "./EggImage";
+import { motion } from "framer-motion";
 
 interface ResultsProps {
   totalRolls: number;
@@ -25,6 +25,10 @@ type RarityCount = {
   ultimate: number;
 };
 
+const fadeInVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { duration: 1 } },
+};
 const Results = ({ resultData, totalRolls }: ResultsProps) => {
   const imageSize = { width: 100, height: 100 };
   const resultArray: ResultArray = [];
@@ -85,7 +89,13 @@ const Results = ({ resultData, totalRolls }: ResultsProps) => {
       </header>
       <section className={styles.eggResultsContainer}>
         {resultArray.map((result, index) => (
-          <div key={index} className={styles.result}>
+          <motion.div
+            key={index}
+            className={styles.result}
+            initial={"hidden"}
+            variants={fadeInVariants}
+            whileInView="visible"
+          >
             <EggImage
               rarity="none"
               image={result.image}
@@ -94,7 +104,7 @@ const Results = ({ resultData, totalRolls }: ResultsProps) => {
             <span
               className={styles.resultName}
             >{`${result.name} x${result.count}`}</span>
-          </div>
+          </motion.div>
         ))}
       </section>
     </div>
