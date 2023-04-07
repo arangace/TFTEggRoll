@@ -25,6 +25,15 @@ const Egg = ({
     hidden: { opacity: 0, display: "none" },
     visible: { opacity: 1, display: "block" },
   };
+  const resultTitleVariants = {
+    hidden: { opacity: 0, display: "none" },
+    visible: {
+      opacity: 1,
+      display: "block",
+      transition: { duration: 1 },
+    },
+  };
+
   return (
     <div className={styles.eggContainer}>
       {isRolling && egg ? (
@@ -56,7 +65,14 @@ const Egg = ({
 
       <div className={styles.titleContainer}>
         {!isRolling && egg ? (
-          <h3 className={styles.eggName}>{egg.name}</h3>
+          <motion.h3
+            initial={"hidden"}
+            variants={resultTitleVariants}
+            animate={isRolling ? "hidden" : "visible"}
+            className={styles.eggName}
+          >
+            {egg.name}
+          </motion.h3>
         ) : (
           ""
         )}
