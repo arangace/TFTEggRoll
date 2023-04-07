@@ -61,8 +61,14 @@ a {
   font-size: 4rem;
   font-weight: 700;
   margin: 1rem 0;
+  padding-left: 1rem;
+  padding-right: 1rem;
 }
-
+@media (max-width: 768px) {
+  .title-heading {
+    font-size: 3.75rem;
+  }
+}
 .footer {
   padding-top: 2rem;
   display: flex;
@@ -70,6 +76,11 @@ a {
   justify-content: center;
   align-items: center;
   font-size: 0.75rem;
+}
+@media (max-width: 414px) {
+  .footer {
+    padding-bottom: 2rem;
+  }
 }
 .footer-author {
   padding-bottom: 1rem;
