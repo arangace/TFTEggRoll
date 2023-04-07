@@ -81,7 +81,7 @@ const Gacha = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <section className={styles.container}>
       {!showResults ? (
         <>
           {start ? (
@@ -136,7 +136,7 @@ const Gacha = () => {
           <Results totalRolls={rollsRef.current} resultData={resultData} />
         </>
       )}
-    </div>
+    </section>
   );
 };
 
