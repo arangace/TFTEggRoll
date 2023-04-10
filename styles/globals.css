@@ -63,10 +63,11 @@ a {
   margin: 1rem 0;
   padding-left: 1rem;
   padding-right: 1rem;
+  text-align: center;
 }
 @media (max-width: 768px) {
   .title-heading {
-    font-size: 3.75rem;
+    font-size: 3.5rem;
   }
 }
 .footer {
