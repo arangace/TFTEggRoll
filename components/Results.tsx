@@ -1,22 +1,20 @@
 import styles from "../styles/results.module.scss";
 import EggImage from "./EggImage";
 import { motion } from "framer-motion";
+import { fadeInVariants } from "../utils/motion";
 
-interface ResultsProps {
-  totalRolls: number;
-  resultData: {
-    name: string;
-    rarity: string;
-    image: string;
-  }[];
+interface ResultData {
+  name: string;
+  rarity: string;
+  image: string;
 }
 
-type ResultArray = {
-  name: string;
-  count: number;
-  image: string;
-  rarity: string;
-}[];
+type ResultsProps = {
+  totalRolls: number;
+  resultData: ResultData[];
+};
+
+type ResultArray = (ResultData & { count: number })[];
 
 type RarityCount = {
   rare: number;
@@ -25,10 +23,6 @@ type RarityCount = {
   ultimate: number;
 };
 
-const fadeInVariants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { duration: 1 } },
-};
 const Results = ({ resultData, totalRolls }: ResultsProps) => {
   const imageSize = { width: 100, height: 100 };
   const resultArray: ResultArray = [];

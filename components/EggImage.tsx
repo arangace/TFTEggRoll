@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "../styles/eggImage.module.scss";
-import { EggProps } from "../types/Types";
+import { EggItem } from "../types/Types";
 
-interface EggImageProps extends EggProps {
+interface EggImageProps extends Omit<EggItem, "name"> {
   imageSize: { width: number; height: number };
 }
-
 const EggImage = ({ image, rarity, imageSize }: EggImageProps) => {
   const [imageSrc, setImageSrc] = useState("");
   const [raritySrc, setraritySrc] = useState("");
+
   useEffect(() => {
     setImageSrc(`/images/${image}`);
   }, [image]);

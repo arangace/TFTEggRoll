@@ -1,11 +1,8 @@
-export interface EggProps {
+export interface EggItem {
   image: string;
   rarity: string;
-  name?: string;
-}
-export interface EggObject {
   name: string;
+}
+export interface EggObject extends EggItem {
   rate: number;
-  image: string;
-  rarity: string;
 }

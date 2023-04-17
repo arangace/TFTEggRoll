@@ -1,30 +1,32 @@
 import React, { useEffect, useState, useRef } from "react";
 import styles from "../styles/gacha.module.scss";
-import { EggObject, EggProps } from "../types/Types";
+import { EggObject, EggItem } from "../types/Types";
 import Image from "next/image";
 import Egg from "./Egg";
 import { eggVarieties, defaultEgg } from "../constants/egg-variants";
 import Results from "./Results";
 
-type ResultData = {
-  name: string;
-  rarity: string;
-  image: string;
-};
+type ProbabilityCalculationResultData =
+  | { egg: EggObject; eggRarity: string }
+  | undefined;
 
 const Gacha = () => {
-  const [egg, setEgg] = useState<EggProps>(defaultEgg);
+  const [egg, setEgg] = useState<EggItem>(defaultEgg);
   const [isRolling, setisRolling] = useState(false);
   const [start, setStart] = useState(true);
   const [showResults, setshowResults] = useState(false);
-  const [resultData, setresultData] = useState<ResultData[]>([]);
+  const [resultData, setresultData] = useState<EggItem[]>([]);
   const rollsRef = useRef(0);
   const animationDuration = 2;
   const imageSize = { width: 300, height: 275 };
 
   const handleOnClickOpen = () => {
     setStart(false);
-    handleResultData(calculateResult(eggVarieties));
+
+    let result = calculateResult(eggVarieties);
+    if (result) {
+      handleResultData(result);
+    }
 
     setTimeout(() => {
       setisRolling(false);
@@ -35,7 +37,10 @@ const Gacha = () => {
   const handleOnClickResults = () => {
     setshowResults(!showResults);
   };
-  const calculateResult = (eggRates: EggObject[]) => {
+
+  const calculateResult = (
+    eggRates: EggObject[]
+  ): ProbabilityCalculationResultData => {
     const roll = Math.random();
     let cumulativeProbability = 0;
     let eggRarity = "";
@@ -66,7 +71,13 @@ const Gacha = () => {
     }
   };
 
-  const handleResultData = ({ egg, eggRarity }: any) => {
+  const handleResultData = ({
+    egg,
+    eggRarity,
+  }: {
+    egg: EggItem;
+    eggRarity: string;
+  }) => {
     setisRolling(true);
     setEgg({ image: egg.image, rarity: eggRarity, name: egg.name });
     setTimeout(() => {
@@ -98,6 +109,8 @@ const Gacha = () => {
             <>
               <div className={styles.resultsButton}>
                 <button
+                  typeof="button"
+                  role="Results button"
                   onClick={handleOnClickResults}
                   className={`${styles.buttonSecondary}`}
                 >
@@ -113,19 +126,23 @@ const Gacha = () => {
             </>
           )}
           <button
+            typeof="button"
+            role="Open egg button"
             onClick={handleOnClickOpen}
             disabled={isRolling}
             className={`${styles.button} ${
               isRolling ? styles.rollButtonDisabled : ""
             }`}
           >
-            Open
+            <span>Open</span>
           </button>
         </>
       ) : (
         <>
           <div className={styles.backButton}>
             <button
+              role="Back button"
+              typeof="button"
               onClick={handleOnClickResults}
               className={`${styles.buttonSecondary}`}
             >

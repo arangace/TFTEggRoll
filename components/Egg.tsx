@@ -1,15 +1,21 @@
 import React from "react";
-import { EggProps } from "../types/Types";
+import { EggItem } from "../types/Types";
 import EggImage from "./EggImage";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import styles from "../styles/egg.module.scss";
-interface isRollingProp {
+import {
+  rockingVariants,
+  resultVariants,
+  resultTitleVariants,
+} from "../utils/motion";
+
+type isRollingProp = {
   isRolling: boolean;
-  egg: EggProps;
+  egg: EggItem;
   animationDuration: number;
   imageSize: { width: number; height: number };
-}
+};
 
 const Egg = ({
   isRolling,
@@ -17,23 +23,6 @@ const Egg = ({
   animationDuration,
   imageSize,
 }: isRollingProp) => {
-  const rockingVariants = {
-    start: { rotate: [0, -45, 45, 0] },
-    end: { rotate: 0 },
-  };
-  const resultVariants = {
-    hidden: { opacity: 0, display: "none" },
-    visible: { opacity: 1, display: "block" },
-  };
-  const resultTitleVariants = {
-    hidden: { opacity: 0, display: "none" },
-    visible: {
-      opacity: 1,
-      display: "block",
-      transition: { duration: 1 },
-    },
-  };
-
   return (
     <div className={styles.eggContainer}>
       {isRolling && egg ? (
@@ -52,9 +41,7 @@ const Egg = ({
             className={styles.eggImage}
           />
         </motion.div>
-      ) : (
-        ""
-      )}
+      ) : null}
       <motion.div
         initial={"hidden"}
         variants={resultVariants}
@@ -73,9 +60,7 @@ const Egg = ({
           >
             {egg.name}
           </motion.h3>
-        ) : (
-          ""
-        )}
+        ) : null}
       </div>
     </div>
   );
