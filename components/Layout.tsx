@@ -13,7 +13,7 @@ export default function Layout({ children }: LayoutProps) {
       <footer className="footer">
         <span className="footer-author">Developed by: Andy Huang</span>
         <span className="footer-link">
-          <a href="https://github.com/arangace/TFTEggRoll">GitHub Link </a>
+          <a href="https://github.com/arangace/TFTEggRoll" target="_blank">GitHub Link </a>
         </span>
       </footer>
     </div>
