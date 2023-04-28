@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>TFT EggRoll TEST</title>
+        <title>TFT EggRoll</title>
         <meta
           name="description"
           content="TFT Little Legend egg roll simulator"
