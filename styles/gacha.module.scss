@@ -70,3 +70,21 @@
     margin-left: 5px;
   }
 }
+.backButton{
+  &:after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f054";
+    margin-left: 5px;
+    transform: rotate(180deg);
+  }
+}
+.resultButton{
+
+  &:after {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    content: "\f054";
+    margin-left: 5px;
+  }
+}
