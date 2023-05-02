@@ -112,7 +112,7 @@ const Gacha = () => {
                   typeof="button"
                   role="Results button"
                   onClick={handleOnClickResults}
-                  className={`${styles.buttonSecondary} ${styles.resultButton}`}
+                  className={`${styles.buttonSecondary}`}
                 >
                   <span>Results</span>
                 </button>
@@ -144,7 +144,7 @@ const Gacha = () => {
               role="Back button"
               typeof="button"
               onClick={handleOnClickResults}
-              className={`${styles.buttonSecondary} ${styles.backButton}`}
+              className={`${styles.buttonSecondary}`}
             >
               <span>Back</span>
             </button>
